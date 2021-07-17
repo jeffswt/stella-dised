@@ -26,7 +26,7 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   cupertino_icons: ^1.0.2
-  glassmorphism: ^2.0.1
+  native_pdf_view: ^4.1.0
 
 dev_dependencies:
   flutter_test:
@@ -51,6 +51,12 @@ flutter:
     - assets/courses/6-828.jpg
     - assets/courses/6-851.jpg
     - assets/courses/6-858.jpg
+    - assets/books/haskell.jpg
+    - assets/books/js.jpg
+    - assets/books/ocaml.jpg
+    - assets/books/python.jpg
+    - assets/books/rust.pdf  # https://lise-henry.github.io/books/trpl1.pdf
+    - assets/books/rust.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

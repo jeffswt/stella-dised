@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:stella/ui/neumorph.dart';
 
+routePush(BuildContext context, Widget Function(BuildContext) builder,
+    [dynamic payload]) async {
+  var res = await Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: builder,
+      settings: RouteSettings(
+        arguments: payload,
+      ),
+    ),
+  );
+  return res;
+}
+
 class SectionTitle extends StatelessWidget {
   /// Section title
   final String title;
@@ -39,4 +53,57 @@ class SectionTitle extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
     );
   }
+}
+
+Widget defaultTile(
+  BuildContext context, {
+  required double width,
+  required double height,
+  required String title,
+  required String imagePath,
+  required Function() onPressed,
+}) {
+  Widget image = ClipRRect(
+    child: Image.asset(
+      imagePath,
+      fit: BoxFit.cover,
+      width: width,
+      height: height,
+    ),
+    borderRadius: BorderRadius.circular(8.0),
+  );
+  Widget button = NeuButton(
+    child: Column(
+      children: [
+        image,
+        Container(
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.bodyText1,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+          ),
+          padding: EdgeInsets.only(
+            top: 8.0,
+            left: 12.0,
+            right: 12.0,
+          ),
+        ),
+      ],
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+    ),
+    elevation: 12.0,
+    shape: NeuShape.Concave,
+    onPressed: onPressed,
+  );
+  return Container(
+    child: button,
+    width: width,
+    height: height + 50.0,
+    margin: EdgeInsets.symmetric(
+      horizontal: StellaTheme.of(context).tilePadding / 2,
+    ),
+  );
 }

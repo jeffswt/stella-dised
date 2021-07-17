@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:stella/ui/neumorph.dart';
+import 'package:stella/ui/common.dart';
 
 class Course {
   final String id;
@@ -87,46 +87,13 @@ class CourseTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget button = NeuButton(
-      child: Column(
-        children: [
-          ClipRRect(
-            child: Image.asset(
-              course.imagePath,
-              fit: BoxFit.cover,
-              width: 130.0,
-              height: 130.0,
-            ),
-            borderRadius: BorderRadius.circular(8.0),
-          ),
-          Container(
-            child: Text(
-              course.name,
-              style: Theme.of(context).textTheme.bodyText1,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            padding: EdgeInsets.only(
-              top: 8.0,
-              left: 12.0,
-              right: 12.0,
-            ),
-          ),
-        ],
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-      ),
-      elevation: 12.0,
-      shape: NeuShape.Concave,
-    );
-    return Container(
-      child: button,
+    return defaultTile(
+      context,
       width: 130.0,
-      height: 180.0,
-      margin: EdgeInsets.symmetric(
-        horizontal: StellaTheme.of(context).tilePadding / 2,
-      ),
+      height: 130.0,
+      title: course.name,
+      imagePath: course.imagePath,
+      onPressed: () {},
     );
   }
 }

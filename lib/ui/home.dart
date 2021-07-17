@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stella/ui/books.dart';
 import 'package:stella/ui/common.dart';
 import 'package:stella/ui/courses.dart';
 import 'package:stella/ui/neumorph.dart';
@@ -22,6 +23,11 @@ class _HomeRouteState extends State<HomeRoute> {
             onTap: () {},
           ),
           _coursesBlock(),
+          SectionTitle(
+            title: 'Books',
+            onTap: () {},
+          ),
+          _booksBlock(),
           Container(height: 400.0),
         ],
         mainAxisSize: MainAxisSize.min,
@@ -146,7 +152,6 @@ class _HomeRouteState extends State<HomeRoute> {
     row.add(SizedBox(width: sTheme.padding.right - sTheme.tilePadding / 2));
     return ConstrainedBox(
       child: ListView(
-        // children: List.generate(5, (index) => Container(height: 40, width: 40)),
         children: row,
         scrollDirection: Axis.horizontal,
         physics: BouncingScrollPhysics(
@@ -156,11 +161,30 @@ class _HomeRouteState extends State<HomeRoute> {
       constraints:
           BoxConstraints.tight(Size(MediaQuery.of(context).size.width, 180)),
     );
-    return Container(
-      child: Row(
-        children: row,
+  }
+
+  Widget _booksBlock() {
+    StellaThemeData sTheme = StellaTheme.of(context);
+    List<Widget> row = [
+      Expanded(
+        child: SizedBox(
+          width: sTheme.padding.left - sTheme.tilePadding / 2,
+        ),
+        flex: 0,
       ),
-      width: MediaQuery.of(context).size.width * 2,
+    ];
+    for (Book book in getAllBooks()) row.add(BookTile(book: book));
+    row.add(SizedBox(width: sTheme.padding.right - sTheme.tilePadding / 2));
+    return ConstrainedBox(
+      child: ListView(
+        children: row,
+        scrollDirection: Axis.horizontal,
+        physics: BouncingScrollPhysics(
+          parent: AlwaysScrollableScrollPhysics(),
+        ),
+      ),
+      constraints:
+          BoxConstraints.tight(Size(MediaQuery.of(context).size.width, 215)),
     );
   }
 }
