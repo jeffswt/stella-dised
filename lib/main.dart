@@ -53,9 +53,26 @@ class MainAppWrapper extends StatelessWidget
 
 class StellaApp extends StatelessWidget
 {
+  /// Images that require preloading.
+  final List<String> assetImages = [
+    'assets/avatar.png',
+    'assets/courses/6-036.jpg',
+    'assets/courses/6-441.jpg',
+    'assets/courses/6-828.jpg',
+    'assets/courses/6-851.jpg',
+    'assets/courses/6-858.jpg',
+    'assets/books/haskell.jpg',
+    'assets/books/js.jpg',
+    'assets/books/ocaml.jpg',
+    'assets/books/python.jpg',
+    'assets/books/rust.png',
+  ];
+
   @override
   Widget build(BuildContext context)
   {
+    for (String imageFile in assetImages)
+      precacheImage(AssetImage(imageFile), context);
     return MaterialApp(
       localizationsDelegates: <LocalizationsDelegate>[
         GlobalMaterialLocalizations.delegate,

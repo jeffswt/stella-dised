@@ -45,9 +45,18 @@ class SectionTitle extends StatelessWidget {
             bottom: StellaTheme.of(context).blockPadding * 0.4,
           ),
         ),
+        flex: 10,
+      ),
+      Expanded(
+        child: Container(),
         flex: 1,
       ),
     ];
+    if (onTap != null)
+      row.add(Container(
+        child: neuIconButton(context, Icons.more_horiz),
+        padding: EdgeInsets.only(top: 38.0, right: 20.0),
+      ));
     return Row(
       children: row,
       crossAxisAlignment: CrossAxisAlignment.start,

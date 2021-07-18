@@ -28,7 +28,17 @@ class _HomeRouteState extends State<HomeRoute> {
             onTap: () {},
           ),
           _booksBlock(),
-          Container(height: 400.0),
+          SectionTitle(
+            title: 'More Courses',
+            onTap: () {},
+          ),
+          _coursesBlock(),
+          SectionTitle(
+            title: 'More Books',
+            onTap: () {},
+          ),
+          _booksBlock(),
+          Container(height: 60.0),
         ],
         mainAxisSize: MainAxisSize.min,
       ),
@@ -106,7 +116,7 @@ class _HomeRouteState extends State<HomeRoute> {
               children: [
                 Container(
                   child: Text(
-                    '6.851 Advanced Data Structures (Fall 2021)',
+                    '6.858 Computer Systems Security (Spring 2021)',
                     style: Theme.of(context).textTheme.headline6,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -119,7 +129,7 @@ class _HomeRouteState extends State<HomeRoute> {
                 ),
                 ClipRRect(
                   child: Image.asset(
-                    'assets/courses/6-851.jpg',
+                    'assets/courses/6-858.jpg',
                     width: MediaQuery.of(context).size.width,
                     fit: BoxFit.cover,
                     height: 200.0,
@@ -131,6 +141,12 @@ class _HomeRouteState extends State<HomeRoute> {
             ),
             elevation: 12.0,
             shape: NeuShape.Convex,
+            onPressed: () {
+              routePush(
+                  context,
+                  (BuildContext context) =>
+                      CourseViewRoute(course: getAllCourses()[3]));
+            },
           ),
         ),
         SizedBox(width: StellaTheme.of(context).padding.right),
@@ -141,11 +157,8 @@ class _HomeRouteState extends State<HomeRoute> {
   Widget _coursesBlock() {
     StellaThemeData sTheme = StellaTheme.of(context);
     List<Widget> row = [
-      Expanded(
-        child: SizedBox(
-          width: sTheme.padding.left - sTheme.tilePadding / 2,
-        ),
-        flex: 0,
+      SizedBox(
+        width: sTheme.padding.left - sTheme.tilePadding / 2,
       ),
     ];
     for (Course course in getAllCourses()) row.add(CourseTile(course: course));
@@ -166,11 +179,8 @@ class _HomeRouteState extends State<HomeRoute> {
   Widget _booksBlock() {
     StellaThemeData sTheme = StellaTheme.of(context);
     List<Widget> row = [
-      Expanded(
-        child: SizedBox(
-          width: sTheme.padding.left - sTheme.tilePadding / 2,
-        ),
-        flex: 0,
+      SizedBox(
+        width: sTheme.padding.left - sTheme.tilePadding / 2,
       ),
     ];
     for (Book book in getAllBooks()) row.add(BookTile(book: book));

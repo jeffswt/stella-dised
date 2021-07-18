@@ -308,6 +308,25 @@ class _NeuButtonState extends State<NeuButton> with TickerProviderStateMixin {
   }
 }
 
+Widget neuIconButton(BuildContext context, IconData icon) {
+  StellaThemeData sTheme = StellaThemeData.defaultLight();
+  return NeuButton(
+    child: Container(
+      child: Icon(
+        icon,
+        size: 20.0,
+        color: sTheme.hintColor,
+      ),
+      width: 40.0,
+      height: 35.0,
+      alignment: Alignment.center,
+    ),
+    radius: 8.0,
+    elevation: 6.0,
+    shape: NeuShape.Concave,
+  );
+}
+
 class StellaPageScaffold extends StatelessWidget {
   /// Background before the scrolly thingy.
   final Widget background;
@@ -326,38 +345,43 @@ class StellaPageScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: StellaTheme.of(context).canvasColor,
-          ),
-          background,
-          ListView(
-            // makes it scrollable
-            children: [
-              Container(
-                // the padding
-                height: topExtent,
-              ),
-              NeuContainer(
-                child: body,
-                elevation: 12.0,
-                radius: 30.0,
-                shape: NeuShape.Flat,
-                overrideTheta: pi * 10 / 9,
-                overrideColor: StellaTheme.of(context).backgroundCanvasColor,
-              ),
-            ],
-            physics: BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics(),
+    StellaThemeData sTheme = StellaThemeData.defaultLight();
+    return StellaTheme(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              color: sTheme.canvasColor,
             ),
-          ),
-        ],
-        alignment: AlignmentDirectional.topCenter,
+            background,
+            ListView(
+              // makes it scrollable
+              children: [
+                Container(
+                  // the padding
+                  height: topExtent,
+                ),
+                NeuContainer(
+                  child: body,
+                  elevation: 12.0,
+                  radius: 30.0,
+                  shape: NeuShape.Flat,
+                  overrideTheta: pi * 10 / 9,
+                  overrideColor: sTheme.backgroundCanvasColor,
+                ),
+              ],
+              physics: BouncingScrollPhysics(
+                parent: AlwaysScrollableScrollPhysics(),
+              ),
+            ),
+          ],
+          alignment: AlignmentDirectional.topCenter,
+        ),
       ),
+      lightTheme: null,
+      darkTheme: null,
     );
   }
 }
